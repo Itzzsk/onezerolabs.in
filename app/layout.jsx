@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import Navbar from '../components/Navbar'
 import SmoothScroll from '../components/SmoothScroll'
+import Script from 'next/script' // <--- THIS WAS MISSING. IT IS FIXED NOW.
 
 export const metadata = {
   metadataBase: new URL('https://onezerolabs.in'),
@@ -30,14 +31,12 @@ export const metadata = {
     },
   },
 
-  // 1. ICONS & MANIFEST
   icons: {
     icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png', // Matches your file
+    apple: '/apple-touch-icon.png',
   },
-  manifest: '/site.webmanifest', // Matches your file
+  manifest: '/site.webmanifest',
 
-  // 2. SOCIAL MEDIA CARDS
   openGraph: {
     title: 'OneZeroLabs | A Digital Product Studio',
     description: 'OneZeroLabs builds modern web and mobile apps with a focus on AI, brand-driven design, and custom software solutions.',
@@ -47,7 +46,7 @@ export const metadata = {
     locale: 'en_IN', 
     images: [
       {
-        url: '/og-image.jpg', // Make sure this file exists in public/
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'OneZeroLabs Preview',
@@ -61,7 +60,6 @@ export const metadata = {
     images: ['/og-image.jpg'], 
   },
 
-  // 3. ROBOTS (Google Settings)
   robots: {
     index: true,
     follow: true,
@@ -74,7 +72,6 @@ export const metadata = {
     },
   },
   
-  // 4. GEO TAGS (Local SEO)
   other: {
     "geo.region": "IN-KA", 
     "geo.placename": "Bengaluru",
@@ -94,7 +91,6 @@ export const viewport = {
 }
 
 export default function RootLayout({ children }) {
-  // JSON-LD for LinkedIn
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
@@ -109,8 +105,9 @@ export default function RootLayout({ children }) {
       addressLocality: 'Bengaluru',
       addressRegion: 'Karnataka'
     },
+    // Linked to the main company profile for better SEO authority
     sameAs: [
-      'https://www.linkedin.com/posts/onezerolabs_onezerolabs-aryavarh-techathon2025-activity-7392221582292676609-SlUw?utm_source=share&utm_medium=member_android&rcm=ACoAAFMjgesBc61s3MsKWqbxXT1uxtVdCHCuTWc',
+      'https://www.linkedin.com/company/onezerolabs', 
     ]
   }
 
@@ -141,7 +138,8 @@ export default function RootLayout({ children }) {
             {children}
           </main>
         </SmoothScroll>
-        {/* 2. GOOGLE ANALYTICS CODE ADDED HERE */}
+
+        {/* GOOGLE ANALYTICS */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-0ZBFRVQH9Z"
           strategy="afterInteractive"
@@ -151,7 +149,6 @@ export default function RootLayout({ children }) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
             gtag('config', 'G-0ZBFRVQH9Z');
           `}
         </Script>
