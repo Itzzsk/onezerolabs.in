@@ -172,7 +172,7 @@ export default function Contact() {
                  <div className="space-y-2 md:col-span-2">
                      <p className="text-white/40 font-mono text-xs uppercase tracking-widest">On The Grid</p>
                      <div className="flex gap-6">
-                        <a href="https://www.linkedin.com/posts/onezerolabs_onezerolabs-aryavarh-techathon2025-activity-7392221582292676609-SlUw?utm_source=share&utm_medium=member_android&rcm=ACoAAFMjgesBc61s3MsKWqbxXT1uxtVdCHCuTWc" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 text-white hover:text-[#D1F349] transition-colors">
+                        <a href="https://www.linkedin.com/company/onezerolabs/" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 text-white hover:text-[#D1F349] transition-colors">
                             <Linkedin size={20} />
                             <span className="font-syne font-bold text-lg">LinkedIn</span>
                             <ArrowUpRight size={14} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
@@ -345,4 +345,5 @@ export default function Contact() {
       </div>
     </main>
   )
+
 }
