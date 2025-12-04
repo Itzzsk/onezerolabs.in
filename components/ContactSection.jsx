@@ -127,7 +127,7 @@ export default function ContactSection() {
             
             {/* HUGE EMAIL LINK */}
             <a 
-              href="mailto:hello@oneszerolabs.com"
+              href="mailto:onezerolabs82@gmail.com"
               className="group relative text-xl md:text-2xl lg:text-3xl font-bold text-black font-syne tracking-tight transition-colors duration-300 break-all sm:break-normal text-left mb-8 block"
             >
               hello@onezerolabs.com
@@ -154,7 +154,7 @@ export default function ContactSection() {
 
                 {/* Email (Secondary Action) */}
                 <a 
-                    href="mailto:hello@oneszerolabs.com"
+                    href="mailto:onezerolabs82@gmail.com"
                     className="flex items-center gap-2 group cursor-pointer"
                 >
                     <div className="p-2 border border-black/10 rounded-full group-hover:bg-black group-hover:text-white transition-colors duration-300">
@@ -173,4 +173,5 @@ export default function ContactSection() {
     </section>
   )
 }
+
 
