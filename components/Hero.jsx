@@ -3,22 +3,24 @@
 import React, { useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from 'framer-motion'
 import { ArrowDown, GripHorizontal, Plus } from 'lucide-react'
+
 const FontLoader = () => (
   <style dangerouslySetInnerHTML={{__html: `
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
     .font-syne { font-family: 'Syne', sans-serif; }
   `}} />
 )
+
 // ----------------------------------------------------------------------
 // 1. FOOTER MARQUEE (Half-Hidden)
 // ----------------------------------------------------------------------
 const FooterMarquee = () => {
     const images = [
-        "graphic designs/Picsart_25-03-16_18-07-44-231.jpg", // Abstract Fluid
-        "graphic designs/Picsart_24-12-15_18-01-42-142.jpg", // Space
-        "graphic designs/Picsart_25-03-09_17-30-39-120.jpg", // Fashion
-        "graphic designs/Picsart_25-01-04_14-20-24-939.jpg", // Portrait
-        "graphic designs/Picsart_25-03-01_19-03-26-625.jpg", // Tech
+        "graphic designs/Picsart_25-03-16_18-07-44-231.jpg", 
+        "graphic designs/Picsart_24-12-15_18-01-42-142.jpg", 
+        "graphic designs/Picsart_25-03-09_17-30-39-120.jpg", 
+        "graphic designs/Picsart_25-01-04_14-20-24-939.jpg", 
+        "graphic designs/Picsart_25-03-01_19-03-26-625.jpg", 
     ]
 
     return (
@@ -89,9 +91,9 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
       onTouchEnd={() => setIsDragging(false)}
-      // Removed 'touch-none' from here so the page can scroll normally
       className="relative w-full h-[100dvh] overflow-hidden font-sans cursor-row-resize bg-black"
     >
+      <FontLoader />
       
       {/* =========================================
           TOP ZONE (WHITE / "ONE")
@@ -103,8 +105,17 @@ export default function Hero() {
           {/* Subtle Grid Texture */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E")` }} />
 
-          {/* Top Header */}
-          
+          {/* --- NEW PREMIUM HEADER SECTION --- */}
+          <div className="relative z-10 mb-4 flex flex-col items-center select-none">
+            {/* Small decorative line for structure */}
+            <div className="w-8 h-[2px] bg-black mb-3 md:mb-4 opacity-80"></div>
+            
+            {/* The Text */}
+            <h2 className="font-['Syne'] text-[10px] md:text-sm font-bold tracking-[0.3em] uppercase text-black text-center leading-relaxed">
+              Beyond Agency <br className="md:hidden" /> Into Innovation
+            </h2>
+          </div>
+          {/* ---------------------------------- */}
 
           {/* Main Text */}
           <div className="relative z-10 mb-2 md:mb-8 pointer-events-none select-none">
@@ -119,8 +130,8 @@ export default function Hero() {
           DIVIDER LINE (THE HANDLE)
          ========================================= */}
       <motion.div 
-         className="absolute w-full h-px bg-transparent z-50 flex items-center justify-center pointer-events-none"
-         style={{ top: heightTop }} 
+          className="absolute w-full h-px bg-transparent z-50 flex items-center justify-center pointer-events-none"
+          style={{ top: heightTop }} 
       >
           {/* The Visual Line */}
           <div className="w-full h-[2px] bg-indigo-600 shadow-[0_0_15px_rgba(79,70,229,0.5)]" />
@@ -128,7 +139,6 @@ export default function Hero() {
           {/* The Handle Icon - Touch Trigger */}
           <div 
             onTouchStart={() => setIsDragging(true)}
-            // Added 'touch-none' here so dragging the handle doesn't scroll the page
             className="absolute px-3 py-1 md:px-4 md:py-1 bg-indigo-600 rounded-full flex items-center gap-2 text-white shadow-lg pointer-events-auto cursor-grab active:cursor-grabbing touch-none"
           >
               <GripHorizontal size={14} />
