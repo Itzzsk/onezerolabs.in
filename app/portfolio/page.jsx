@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef } from 'react'
-import Link from 'next/link' // Import Link
+import Link from 'next/link'
 import { motion, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 
@@ -16,13 +16,13 @@ const FontLoader = () => (
 )
 
 // ----------------------------------------------------------------------
-// 1. DATA (Description property removed)
+// 1. DATA
 // ----------------------------------------------------------------------
 const projects = [
   // --- Web Development ---
   {
     id: 1,
-    title: "LMS Platform",
+    title: "Smart Attendance & Academic Management System",
     category: "Web Development",
     src: "/lms.jpg",
     href: "/portfolio/LMS"
@@ -172,14 +172,14 @@ export default function WorkGrid() {
 
       {/* --- FOOTER CTA (WHITE) --- */}
       <section className="border-t border-black/10 py-20 md:py-32 text-center bg-white px-4">
-         <a href="/contact" className="group inline-flex flex-col items-center cursor-pointer">
+         <Link href="/contact" className="group inline-flex flex-col items-center cursor-pointer">
             <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-black/50 mb-4 md:mb-6 group-hover:text-black transition-colors underline-offset-4 group-hover:underline">
                 Have an idea?
             </span>
             <h2 className="text-black font-syne font-black text-4xl sm:text-6xl md:text-8xl group-hover:scale-105 transition-transform duration-500 leading-tight">
                 Let's Build It <span className="inline-block transition-transform group-hover:-translate-y-2 group-hover:translate-x-2">→</span>
             </h2>
-         </a>
+         </Link>
       </section>
 
     </main>
@@ -187,7 +187,7 @@ export default function WorkGrid() {
 }
 
 // ----------------------------------------------------------------------
-// 3. PROJECT CARD (Title hidden for design projects)
+// 3. PROJECT CARD 
 // ----------------------------------------------------------------------
 const ProjectCard = ({ project, index }) => {
     const ref = useRef(null);
@@ -198,6 +198,7 @@ const ProjectCard = ({ project, index }) => {
         offset: ["start end", "end start"]
     });
     
+    // Parallax strength
     const yParallax = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
     // --- MOUSE FOLLOWER LOGIC ---
@@ -214,13 +215,29 @@ const ProjectCard = ({ project, index }) => {
 
     const isGraphicDesign = project.category === "Graphic Design";
     const isUIUXDesign = project.category === "UI/UX Design";
-    // Check if we should hide the title
     const isDesignCategory = isGraphicDesign || isUIUXDesign; 
 
-    const aspectRatioClass = isGraphicDesign ? "aspect-[4/3] md:aspect-video" : "aspect-[4/3] md:aspect-[3/2]";
-    const objectFitClass = isGraphicDesign ? "object-cover md:object-contain" : "object-cover";
+    // --- 1. ASPECT RATIO LOGIC ---
+    // Graphic Design (Mobile): 'aspect-auto' -> forces container to match image height exactly (No black bars).
+    // Others: Keep strict aspect ratios.
+    const aspectRatioClass = isGraphicDesign 
+        ? "aspect-auto md:aspect-video" 
+        : "aspect-[4/3] md:aspect-[3/2]";
 
-    // 1. DETERMINE IF IT'S CLICKABLE
+    // --- 2. CONTAINER POSITIONING LOGIC ---
+    // Graphic Design (Mobile): 'relative' -> Image dictates height.
+    // Others/Desktop: 'absolute' -> Parallax dictates height.
+    const innerContainerClass = isGraphicDesign
+        ? "relative w-full h-auto md:absolute md:inset-0 md:h-[120%] md:-top-[10%]"
+        : "absolute inset-0 h-[120%] w-full -top-[10%]";
+
+    // --- 3. IMAGE SIZING LOGIC ---
+    // Graphic Design (Mobile): 'h-auto' -> Natural height.
+    const imageClass = isGraphicDesign
+        ? "w-full h-auto md:h-full md:object-cover"
+        : "h-full w-full object-cover";
+
+    // DETERMINE IF IT'S CLICKABLE
     const isLink = !!project.href;
     const Wrapper = isLink ? Link : 'div';
     const wrapperProps = isLink ? { href: project.href } : {};
@@ -235,21 +252,25 @@ const ProjectCard = ({ project, index }) => {
             onMouseMove={handleMouseMove}
             className={`group relative w-full ${isLink ? 'cursor-auto md:cursor-none' : 'cursor-default'}`}
         >
-            {/* WRAPPER (Link or Div) */}
             <Wrapper {...wrapperProps} className="block">
                 
                 {/* --- IMAGE CONTAINER --- */}
                 <div className={`relative overflow-hidden w-full ${aspectRatioClass} rounded-sm bg-[#111] mb-4 md:mb-6 border border-white/5`}>
                     
-                    {/* Parallax Image Wrapper */}
+                    {/* Image Wrapper */}
                     <motion.div 
-                        style={{ y: yParallax }} 
-                        className="absolute inset-0 h-[120%] w-full -top-[10%]"
+                        // Disable parallax on mobile for Graphic Design to ensure fit, enable for others
+                        style={isGraphicDesign ? {} : { y: yParallax }} 
+                        // For desktop graphic design (md:absolute), the parallax is re-applied via CSS structure if needed,
+                        // but specifically for fixing the mobile black bars, we treat the image as static relative.
+                        className={innerContainerClass}
                     >
                         <motion.img 
                             src={project.src} 
                             alt={project.title} 
-                            className={`w-full h-full ${objectFitClass} transition-transform duration-1000 ease-[0.25,1,0.5,1] group-hover:scale-105 opacity-80 group-hover:opacity-100`}
+                            // If it's NOT graphic design, or if it is Desktop Graphic design, we can apply effects.
+                            // But strictly for the mobile fix:
+                            className={`${imageClass} transition-transform duration-1000 ease-[0.25,1,0.5,1] group-hover:scale-105 opacity-80 group-hover:opacity-100`}
                         />
                     </motion.div>
                     
@@ -269,25 +290,21 @@ const ProjectCard = ({ project, index }) => {
 
                 {/* --- INFO --- */}
                 <div className="flex flex-col gap-1 px-1">
-                    {/* TITLE / ID ROW */}
                     <div className="flex justify-between items-baseline border-b border-white/10 pb-2 md:pb-3 group-hover:border-white/50 transition-colors duration-500">
-                        {/* CONDITIONAL TITLE DISPLAY */}
+                        {/* Title hidden for design categories to keep cleaner look */}
                         {!isDesignCategory ? (
                             <h3 className="text-xl md:text-3xl font-bold font-syne text-white group-hover:text-white transition-colors">
                                 {project.title}
                             </h3>
                         ) : (
-                            // Renders a small space to keep the ID number vertically aligned
                             <div className="h-6 md:h-8" /> 
                         )}
                         
-                        {/* ID always renders */}
                         <span className="text-white/40 font-mono text-[10px] md:text-xs">
                             {String(project.id).padStart(2, '0')}
                         </span>
                     </div>
                     
-                    {/* CATEGORY ROW (Always shown) */}
                     <div className="flex justify-between items-center text-white/50 text-[10px] md:text-xs font-mono uppercase tracking-widest mt-2">
                         <span className="text-white/60 group-hover:text-white transition-colors">{project.category}</span>
                     </div>
