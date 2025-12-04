@@ -139,7 +139,7 @@ export default function ContactSection() {
                 
                 {/* LinkedIn */}
                 <a 
-                    href="https://www.linkedin.com/posts/onezerolabs_onezerolabs-aryavarh-techathon2025-activity-7392221582292676609-SlUw?utm_source=share&utm_medium=member_android&rcm=ACoAAFMjgesBc61s3MsKWqbxXT1uxtVdCHCuTWc" 
+                    href="https://www.linkedin.com/company/onezerolabs/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 group cursor-pointer"
@@ -173,3 +173,4 @@ export default function ContactSection() {
     </section>
   )
 }
+
