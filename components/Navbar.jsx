@@ -181,7 +181,7 @@ export default function NavbarResponsive() {
                 <div className="order-2 md:order-1">OneZeroLabs © {new Date().getFullYear()}</div>
                 <div className="flex gap-6 order-1 md:order-2">
          
-                    <a href="https://www.linkedin.com/posts/onezerolabs_onezerolabs-aryavarh-techathon2025-activity-7392221582292676609-SlUw?utm_source=share&utm_medium=member_android&rcm=ACoAAFMjgesBc61s3MsKWqbxXT1uxtVdCHCuTWc" className="hover:text-white transition-colors">LinkedIn</a>
+                    <a href="https://www.linkedin.com/company/onezerolabs/" className="hover:text-white transition-colors">LinkedIn</a>
                    
                 </div>
             </motion.div>
@@ -203,3 +203,4 @@ export default function NavbarResponsive() {
     </>
   )
 }
+
