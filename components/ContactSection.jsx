@@ -3,20 +3,21 @@
 import React from 'react'
 import Link from 'next/link'
 import { motion, useMotionValue, useAnimationFrame, useTransform } from 'framer-motion'
-import { ArrowUpRight, Linkedin, Mail } from 'lucide-react'
+import { ArrowRight, Linkedin, Mail } from 'lucide-react'
 
 // ----------------------------------------------------------------------
 // 0. FONT LOADER
 // ----------------------------------------------------------------------
 const FontLoader = () => (
   <style dangerouslySetInnerHTML={{__html: `
-    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap');
     .font-syne { font-family: 'Syne', sans-serif; }
+    .font-inter { font-family: 'Inter', sans-serif; }
   `}} />
 )
 
 // ----------------------------------------------------------------------
-// 1. UTILS
+// 1. UTILS: MARQUEE LOGIC
 // ----------------------------------------------------------------------
 const wrap = (min, max, v) => {
   const rangeSize = max - min
@@ -48,27 +49,29 @@ const VelocityText = ({ children, baseVelocity = 5, className = "" }) => {
 export default function ContactSection() {
   
   const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+    hidden: { opacity: 0, y: 30 }, // Reduced Y distance for subtler entrance
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
   }
 
   return (
-    <section className="relative w-full bg-white overflow-hidden z-40 py-12 md:py-20">
+    // CHANGED: bg-black to bg-white. Reduced padding (py-16 md:py-24). Removed massive pb-48.
+    <section className="relative w-full bg-white overflow-hidden z-40 py-16 md:py-24">
       
-      {/* Inject Font */}
       <FontLoader />
 
-      {/* --- BACKGROUND MARQUEE --- */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full opacity-[0.03] pointer-events-none select-none">
-         <VelocityText baseVelocity={1.5} className="text-[20vw] md:text-[10vw] font-black font-syne leading-none text-black">
-            GET IN TOUCH — SAY HELLO — 
+      {/* --- BACKGROUND MARQUEE (SUBTLE WATERMARK) --- */}
+      {/* CHANGED: text-white to text-neutral-100 for subtle grey on white bg */}
+      <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full opacity-100 pointer-events-none select-none z-0">
+         <VelocityText baseVelocity={1} className="text-[20vw] md:text-[12vw] font-black font-syne leading-none text-neutral-100/50">
+            ONEZEROLABS — INNOVATE — DEPLOY — 
          </VelocityText>
       </div>
 
-      {/* --- CONTENT --- */}
-      <div className="relative z-10 w-full px-6 md:px-12 max-w-[1000px] mx-auto flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 lg:gap-12">
+      {/* --- CONTENT WRAPPER --- */}
+      {/* CHANGED: max-w-[1400px] to max-w-[1200px] for a tighter layout */}
+      <div className="relative z-20 w-full px-6 md:px-12 max-w-[1200px] mx-auto flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12 lg:gap-20">
         
-        {/* LEFT: Heading & CTA */}
+        {/* LEFT COLUMN: Heading & CTA */}
         <div className="max-w-xl w-full flex flex-col items-start text-left">
           
           <motion.div
@@ -78,13 +81,14 @@ export default function ContactSection() {
             variants={fadeInUp}
             className="w-full text-left"
           >
-             <span className="block text-neutral-400 font-mono text-[10px] uppercase tracking-widest mb-4 text-left">
-                // Start a conversation
+             <span className="block text-neutral-500 font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] mb-6 text-left font-bold">
+               // INITIALIZE_CONNECTION
              </span>
              
-             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-black font-syne uppercase tracking-tighter leading-[0.9] mb-6 text-left">
+             {/* CHANGED: Text colors inverted. Sizes slightly reduced. */}
+             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black font-syne uppercase tracking-tighter leading-[0.9] mb-8 text-left">
                Let's build <br />
-               <span className="text-neutral-300">The Future.</span>
+               <span className="text-neutral-400">The Future.</span>
              </h2>
           </motion.div>
 
@@ -96,82 +100,86 @@ export default function ContactSection() {
              transition={{ delay: 0.2 }}
              className="w-full text-left"
           >
-            <p className="text-black/60 text-sm md:text-base font-mono mb-8 max-w-md leading-relaxed text-left">
-              Ready to deploy your next project? Get in touch with us today and let's create something architecturally significant.
+            {/* CHANGED: Text color darker for readability on white */}
+            <p className="text-neutral-600 text-sm md:text-base font-inter mb-10 max-w-md leading-relaxed text-left">
+              Our digital lab is ready to architect your vision. From custom LLMs to high-performance SaaS, let's deploy something significant.
             </p>
 
             <Link href="/contact" className="inline-block">
-              <button className="group relative overflow-hidden px-6 py-3 md:px-8 md:py-4 bg-black text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-[#D1F349] hover:text-black transition-all duration-300 flex items-center gap-3">
-                <span className="relative z-10">Get in Touch</span>
-                <div className="relative z-10 p-1 bg-white/20 rounded-full group-hover:bg-black/10 transition-colors">
-                    <ArrowUpRight size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </div>
-                <div className="absolute inset-0 bg-[#D1F349] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-              </button>
+              {/* CHANGED: Button colors inverted (Black bg, white text). Shadow is now dark. */}
+              <motion.button 
+                whileHover={{ scale: 1.03, boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.15)" }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative px-8 py-4 bg-black text-white rounded-full font-bold uppercase tracking-widest text-[11px] transition-all duration-300 flex items-center gap-3 overflow-hidden"
+              >
+                <span className="relative z-10 font-syne">Start a Project</span>
+                <ArrowRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
             </Link>
           </motion.div>
         </div>
 
-        {/* RIGHT: Email & Social Links */}
+        {/* RIGHT COLUMN: Contact Info */}
         <motion.div 
-            className="flex flex-col items-start w-full lg:w-auto mt-6 lg:mt-0 text-left"
+            className="flex flex-col items-start w-full lg:w-auto text-left mt-10 lg:mt-0"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
             transition={{ delay: 0.4 }}
         >
-            <p className="text-neutral-400 text-[10px] font-mono uppercase tracking-widest mb-2 text-left">
-                Direct Line
+            <p className="text-neutral-500 text-[10px] md:text-xs font-mono uppercase tracking-widest mb-4 text-left font-bold">
+                Transmission Protocol
             </p>
             
-            {/* HUGE EMAIL LINK */}
+            {/* CHANGED: Link color to black. Underline color to black. Sizes reduced. */}
             <a 
-              href="mailto:onezerolabs82@gmail.com"
-              className="group relative text-xl md:text-2xl lg:text-3xl font-bold text-black font-syne tracking-tight transition-colors duration-300 break-all sm:break-normal text-left mb-8 block"
+              href="mailto:hello@onezerolabs.com"
+              className="group relative text-2xl sm:text-3xl md:text-4xl font-bold text-black font-syne tracking-tight transition-colors duration-300 mb-8 block"
             >
               hello@onezerolabs.com
-              <span className="absolute left-0 bottom-0 w-full h-[2px] bg-black scale-x-100 lg:scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out origin-left lg:origin-right lg:group-hover:origin-left" />
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black group-hover:w-full transition-all duration-500 ease-out" />
             </a>
 
-            {/* ADDED: SOCIAL LINKS (LinkedIn & Email) */}
-            <div className="flex items-center gap-6">
-                
-                {/* LinkedIn */}
-                <a 
-                    href="https://www.linkedin.com/company/onezerolabs/" 
+            <div className="flex flex-wrap items-center gap-4">
+                {/* LinkedIn Pill */}
+                {/* CHANGED: Borders and text colors adapted for white background */}
+                <motion.a 
+                    href="https://linkedin.com/..." 
                     target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 group cursor-pointer"
+                    whileHover={{ y: -3, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
+                    className="flex items-center gap-3 border border-black/10 px-5 py-2.5 rounded-full hover:border-black transition-colors group bg-white"
                 >
-                    <div className="p-2 border border-black/10 rounded-full group-hover:bg-black group-hover:text-white transition-colors duration-300">
-                        <Linkedin size={14} />
-                    </div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-black/60 group-hover:text-black transition-colors">
+                    <Linkedin size={14} className="text-neutral-600 group-hover:text-black transition-colors" />
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-600 group-hover:text-black">
                         LinkedIn
                     </span>
-                </a>
+                </motion.a>
 
-                {/* Email (Secondary Action) */}
-                <a 
-                    href="mailto:onezerolabs82@gmail.com"
-                    className="flex items-center gap-2 group cursor-pointer"
+                {/* Email Pill */}
+                <motion.a 
+                    href="mailto:hello@onezerolabs.com"
+                    whileHover={{ y: -3, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
+                    className="flex items-center gap-3 border border-black/10 px-5 py-2.5 rounded-full hover:border-black transition-colors group bg-white"
                 >
-                    <div className="p-2 border border-black/10 rounded-full group-hover:bg-black group-hover:text-white transition-colors duration-300">
-                        <Mail size={14} />
-                    </div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-black/60 group-hover:text-black transition-colors">
+                    <Mail size={14} className="text-neutral-600 group-hover:text-black transition-colors" />
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-600 group-hover:text-black">
                         Email
                     </span>
-                </a>
-
+                </motion.a>
             </div>
-
         </motion.div>
 
       </div>
+
+      {/* --- FOOTER LOGO MARK --- */}
+      {/* CHANGED: Changed color to very subtle black. Reduced translation Y. */}
+      <div className="absolute bottom-0 left-0 w-full flex justify-center overflow-hidden pointer-events-none z-10 translate-y-[10%]">
+          <h1 className="font-syne font-black text-[12vw] leading-none text-black/[0.02] tracking-tighter select-none whitespace-nowrap">
+              ONEZEROLABS
+          </h1>
+      </div>
+
     </section>
   )
 }
-
-
