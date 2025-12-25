@@ -134,10 +134,10 @@ export default function ContactSection() {
             
             {/* CHANGED: Link color to black. Underline color to black. Sizes reduced. */}
             <a 
-              href="mailto:hello@onezerolabs.com"
+              href="mailto:onezerolabs82@gmail.com"
               className="group relative text-2xl sm:text-3xl md:text-4xl font-bold text-black font-syne tracking-tight transition-colors duration-300 mb-8 block"
             >
-              hello@onezerolabs.com
+              hello@onezerolabs.in
               <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black group-hover:w-full transition-all duration-500 ease-out" />
             </a>
 
@@ -145,7 +145,7 @@ export default function ContactSection() {
                 {/* LinkedIn Pill */}
                 {/* CHANGED: Borders and text colors adapted for white background */}
                 <motion.a 
-                    href="https://linkedin.com/..." 
+                    href="https://www.linkedin.com/company/onezerolabs/" 
                     target="_blank" 
                     whileHover={{ y: -3, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
                     className="flex items-center gap-3 border border-black/10 px-5 py-2.5 rounded-full hover:border-black transition-colors group bg-white"
@@ -158,7 +158,7 @@ export default function ContactSection() {
 
                 {/* Email Pill */}
                 <motion.a 
-                    href="mailto:hello@onezerolabs.com"
+                    href="mailto:onezerolabs82@gmail.com"
                     whileHover={{ y: -3, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
                     className="flex items-center gap-3 border border-black/10 px-5 py-2.5 rounded-full hover:border-black transition-colors group bg-white"
                 >
@@ -183,3 +183,4 @@ export default function ContactSection() {
     </section>
   )
 }
+
