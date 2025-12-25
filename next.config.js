@@ -1,13 +1,13 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // REMOVE THIS LINE: output: 'export',  ❌ DELETE THIS
+  
   images: {
     unoptimized: true,
   },
   reactStrictMode: true,
   
-  // ADD THIS SECTION:
   headers: async () => {
     return [
       {
