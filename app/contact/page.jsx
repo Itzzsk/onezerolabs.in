@@ -155,7 +155,7 @@ export default function Contact() {
                  <div className="space-y-2">
                      <p className="text-white/40 font-mono text-xs uppercase tracking-widest">Direct Email</p>
                      <a href="mailto:onezerolabs82@gmail.com" className="block text-xl text-white hover:text-[#D1F349] transition-colors font-syne font-bold underline underline-offset-8 decoration-white/20 hover:decoration-[#D1F349]">
-                        hello@onezerolabs.com
+                        hello@onezerolabs.in
                      </a>
                  </div>
 
@@ -347,4 +347,5 @@ export default function Contact() {
   )
 
 }
+
 
