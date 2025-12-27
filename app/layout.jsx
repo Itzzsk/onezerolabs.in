@@ -124,7 +124,7 @@ export default function RootLayout({ children }) {
     url: 'https://onezerolabs.in',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://onezerolabs.in/logo.png',
+      url: 'https://onezerolabs.in/logo.jpeg',
       width: 250,
       height: 60,
     },
@@ -195,7 +195,7 @@ export default function RootLayout({ children }) {
     name: 'OneZeroLabs',
     alternateName: 'OneZeroLabs EdTech',
     url: 'https://onezerolabs.in',
-    logo: 'https://onezerolabs.in/logo.png',
+    logo: 'https://onezerolabs.in/logo.jpeg',
     foundingDate: '2024',
     foundingLocation: 'Bangalore, Karnataka, India',
     description: 'Leading EdTech development studio specializing in LMS platforms and educational software solutions.',
