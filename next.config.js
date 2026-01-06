@@ -1,12 +1,13 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // REMOVE THIS LINE: output: 'export',  ❌ DELETE THIS
-  
   images: {
     unoptimized: true,
   },
   reactStrictMode: true,
+  
+  // Fix for GSC "Page with redirect" issue
+  trailingSlash: false, // ✅ Ensures consistent URLs without trailing slashes
   
   headers: async () => {
     return [
