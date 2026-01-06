@@ -124,9 +124,9 @@ export default function RootLayout({ children }) {
     url: 'https://onezerolabs.in',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://onezerolabs.in/logo.jpeg',
-      width: 250,
-      height: 60,
+      url: 'https://onezerolabs.in/web-app-manifest-512x512.png',
+      width: 512,
+      height: 512,
     },
     image: {
       '@type': 'ImageObject',
@@ -155,11 +155,8 @@ export default function RootLayout({ children }) {
         name: 'Karnataka',
       },
     ],
-   
-    
     sameAs: [
       'https://www.linkedin.com/company/onezerolabs',
-    
     ],
     knowsAbout: [
       'EdTech Development',
@@ -187,7 +184,7 @@ export default function RootLayout({ children }) {
     ],
   }
 
-  // Organization Schema - EdTech Focused
+  // Organization Schema - EdTech Focused with SQUARE LOGO
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -195,14 +192,18 @@ export default function RootLayout({ children }) {
     name: 'OneZeroLabs',
     alternateName: 'OneZeroLabs EdTech',
     url: 'https://onezerolabs.in',
-    logo: 'https://onezerolabs.in/logo.jpeg',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://onezerolabs.in/web-app-manifest-512x512.png',
+      width: 512,
+      height: 512,
+      contentUrl: 'https://onezerolabs.in/web-app-manifest-512x512.png'
+    },
     foundingDate: '2024',
     foundingLocation: 'Bangalore, Karnataka, India',
     description: 'Leading EdTech development studio specializing in LMS platforms and educational software solutions.',
     sameAs: [
       'https://www.linkedin.com/company/onezerolabs',
-      'https://twitter.com/onezerolabs',
-      'https://github.com/onezerolabs',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
@@ -396,26 +397,6 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-
-        {/* Breadcrumb Schema (Optional - uncomment when needed) */}
-        {/* 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            'itemListElement': [
-              {
-                '@type': 'ListItem',
-                'position': 1,
-                'name': 'Home',
-                'item': 'https://onezerolabs.in'
-              }
-            ]
-          })}}
-          suppressHydrationWarning
-        />
-        */}
       </body>
     </html>
   )
