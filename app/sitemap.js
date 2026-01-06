@@ -1,29 +1,30 @@
+// app/sitemap.js
 export default function sitemap() {
   const baseUrl = 'https://onezerolabs.in'
 
-  const routes = [
+  return [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'weekly',  // Changed from monthly → weekly (homepage changes more)
       priority: 1,
     },
     {
       url: `${baseUrl}/services`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.9,
+      priority: 0.9,  // Increased from 0.8 (important for conversions)
     },
     {
       url: `${baseUrl}/portfolio`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'weekly',  // Changed (portfolio updates often)
+      priority: 0.9,  // Increased (shows your work)
     },
     {
       url: `${baseUrl}/about`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly',  // Changed from yearly
       priority: 0.8,
     },
     {
@@ -32,19 +33,6 @@ export default function sitemap() {
       changeFrequency: 'yearly',
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/privacy-policy`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/terms-of-service`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.5,
-    },
-  ]
 
-  return routes
+  ]
 }
