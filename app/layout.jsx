@@ -2,6 +2,8 @@ import '../styles/globals.css'
 import Navbar from '../components/Navbar'
 import SmoothScroll from '../components/SmoothScroll'
 import Script from 'next/script'
+import { Suspense } from 'react'
+import MixpanelInit from '../components/MixpanelInit'
 
 export const metadata = {
   metadataBase: new URL('https://onezerolabs.in'),
@@ -177,7 +179,11 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+        <Suspense fallback={null}>
+          <MixpanelInit />
+        </Suspense>
       </body>
+
     </html>
   )
 }
